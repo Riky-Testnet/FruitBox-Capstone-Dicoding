@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FoodBox</title>
+    <title>FruitBox</title>
 
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -28,15 +28,24 @@
         <a href="#"> Home </a>
         <a href="#about"> Tentang Kami</a>
         <a href="#menu"> Menu </a>
+        <a href="#products"> Product </a>
         <a href="#contact"> Kontak </a>
       </div>
 
       <div class="navbar-extra">
-        <a href="#" id="search"><i data-feather="search"></i></a>
+        <a href="#" id="search-button"><i data-feather="search"></i></a>
         <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
         <a href="#" id="shopping-cart"><i data-feather="user"></i></a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
+
       </div>
+
+      <!-- Search Form Start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="Search here...">
+        <label for="search-box"><i data-feather="search"></i></label>
+      </div>
+      <!-- Search Form End -->
     </nav>
     <!-- Navbar End -->
 
@@ -126,13 +135,142 @@
 
     <!-- menu Section End-->
 
+    <!-- Product Section -->
+    <section class="products" id="products">
+      <h2><span>Katalog</span> Buah</h2>
+      <p>Berikut Adalah Stock Buah Yang Tersedia</p>
+
+      <div class="row">
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#"><i data-feather="shopping-cart"></i></a>
+            <a href="#"><i data-feather="eye"></i></a>
+          </div>
+          <div class="product-image">
+            <img src="img/product/1.jpg" alt="Product 1">
+          </div>
+          <div class="product-content">
+            <h3>Apel Fuji</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price"> Rp 35.000 / kg <span>Rp 40.000 / kg </span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#"><i data-feather="shopping-cart"></i></a>
+            <a href="#"><i data-feather="eye"></i></a>
+          </div>
+          <div class="product-image">
+            <img src="img/product/2.jpg" alt="Product 1">
+          </div>
+          <div class="product-content">
+            <h3>Jeruk Pontianak</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price"> Rp 30.000 / kg <span>Rp 35.000 / kg </span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#"><i data-feather="shopping-cart"></i></a>
+            <a href="#"><i data-feather="eye"></i></a>
+          </div>
+          <div class="product-image">
+            <img src="img/product/3.jpg" alt="Product 1">
+          </div>
+          <div class="product-content">
+            <h3>Pisan Cavendish</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price"> Rp 15.000 / kg <span>Rp 25.000 / kg </span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#"><i data-feather="shopping-cart"></i></a>
+            <a href="#"><i data-feather="eye"></i></a>
+          </div>
+          <div class="product-image">
+            <img src="img/product/4.jpg" alt="Product 1">
+          </div>
+          <div class="product-content">
+            <h3>Stoberi Impor</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+            </div>
+            <div class="product-price"> Rp 50.000 / 250 Gram <span>Rp 40.000 / Gram </span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#"><i data-feather="shopping-cart"></i></a>
+            <a href="#"><i data-feather="eye"></i></a>
+          </div>
+          <div class="product-image">
+            <img src="img/product/5.jpg" alt="Product 1">
+          </div>
+          <div class="product-content">
+            <h3>Buah Naga Putih</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price"> Rp 25.000 / kg <span>Rp 30.000 / kg </span></div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-icons">
+            <a href="#"><i data-feather="shopping-cart"></i></a>
+            <a href="#"><i data-feather="eye"></i></a>
+          </div>
+          <div class="product-image">
+            <img src="img/product/6.jpg" alt="Product 1">
+          </div>
+          <div class="product-content">
+            <h3>Anggur Merah</h3>
+            <div class="product-stars">
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star" class="star-full"></i>
+              <i data-feather="star"></i>
+            </div>
+            <div class="product-price"> Rp 30.000 / kg <span>Rp 35.000 / kg </span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- Contact Section Start -->
 
     <section id="contact" class="contact">
       <h2><span>Kontak</span> Kami</h2>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque,
-        magnam!
+        Silahkan Hubungi Kami, Jikalau ada Kendala Terkait Layanan
       </p>
 
       <div class="row">
