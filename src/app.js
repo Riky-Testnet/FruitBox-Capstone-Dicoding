@@ -16,12 +16,54 @@ document.addEventListener('alpine:init', () => {
         total: 0,
         quantity: 0,
         add(newItem){
-            this.items.push(newItem);
-            this.quantity++;
-            this.total += newItem.price;
-            console.log(this.total);
+            // Check Barang
+            const cartItem = this.items.find((item) => item.id === newItem.id);
+
+            // Jika Belum ada
+            if(!cartItem) {
+                this.items.push({...newItem, quantity: 1, total: newItem.price});
+                this.quantity++;
+                this.total += newItem.price;
+            } else {
+                this.items = this.items.map((item) => {
+                    if(item.id !== newItem.id) {
+                        return item;
+                    }else {
+                        item.quantity++;
+                        item.total = item.price * item.quantity;
+                        this.quantity++;
+                        this.total += item.price;
+                        return item;
+                    }
+                });
+            }
+
         },
-    })
+        remove(id) {
+            // Ambil item remove
+            const cartItem = this.items.find((item) => item.id === id);
+
+            // Jika item lebih dari 1
+            if(cartItem.quantity > 1) {
+                this.items = this.items.map((item) => {
+                    if(item.id !== id){
+                        return item;
+                    }else {
+                        item.quantity--;
+                        item.total = item.price * item.quantity;
+                        this.quantity--;
+                        this.total -= item.price;
+                        return item;
+                    }
+                });
+            }else if (cartItem.quantity === 1) {
+                // Jika Barangnya sisa 1
+                this.items = this.items.filter((item) => item.id !== id);
+                this.quantity--;
+                this.total -= cartItem.price;
+            }
+        }
+    });
 });
 
 // Konversri Ke Rp
