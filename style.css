@@ -42,6 +42,10 @@ body {
 }
 
 .navbar .navbar-logo {
+    width: 10rem;
+}
+
+.navbar .navbar-logo {
     font-size: 2rem;
     font-weight: 700;
     color: var(--bg);
@@ -94,6 +98,8 @@ body {
     display: none;
 }
 
+
+
 /* Navbar Search Form */
 .navbar .search-form{
     position: absolute;
@@ -127,6 +133,76 @@ body {
     font-size: 2rem;
     margin-right: 1.5rem;
     color: #010101;
+}
+
+/* SHOPPING CART */
+
+#shopping-cart-button {
+    position: relative;
+}
+
+#shopping-cart-button .quantity-badge {
+    display: inline-block;
+    padding: 1px 5px;
+    background-color: red;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 0;
+    right: -10px;
+}
+
+
+.shopping-cart {
+    position: absolute;
+    top: 100%;
+    right: -100%;
+    height: 100vh;
+    width: 35rem;
+    padding: 0 1.5rem;
+    color: var(--bg);
+    background-color: rgb(6, 82, 6);
+    transition: 0.3s linear;
+    border-top-left-radius: 16px;
+}
+
+.shopping-cart.active{
+    right: 0;
+}
+
+.shopping-cart .cart-item {
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--bg);
+    position: relative;
+}
+
+.shopping-cart img {
+    height: 6rem;
+    border-radius: 50%;
+}
+
+.shopping-cart h3 {
+    font-size: 1.6rem;
+    padding-bottom: 0.5rem;
+}
+
+.shopping-cart .item-price {
+    font-size: 1.2rem;
+}
+
+.shopping-cart .remove-item {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+}
+
+.shopping-cart .remove-item:hover {
+    color: yellow;
+
 }
 
 /* Hero Section */
@@ -338,11 +414,11 @@ body {
 .products .product-stars {
     font-size: 1.7rem;
     padding: 0.8rem;
-    color: black ;
+    color: rgb(230, 183, 12) ;
 }
 
 .products .product-stars .star-full {
-    fill: gold;
+    fill: rgb(24, 24, 22);
 
 }
 
@@ -351,11 +427,8 @@ body {
     font-weight: bold;
     color :#010101
 }
-.products .product-price span {
-    text-decoration: line-through;
-    font-weight: lighter;
-    font-size: 1rem;
-}
+
+
 /* Contact Section */
 
 .contact .row {
@@ -445,6 +518,79 @@ footer .credit p{
     color: var(--bg);
     font-weight: 700;
     font-size: 12px;
+}
+
+/* Modal Box */
+/* Item Detail */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(18, 150, 71, 0.7);
+}
+
+.modal-container {
+    position: relative;
+    background-color: var(--bg);
+    color: black;
+    margin: 15% auto;
+    padding: 1.2 rem;
+    border: 1px solid #666;
+    width: 80%;
+    animation: animateModal 0.5s;
+   
+}
+
+/* Modal Animation */
+@keyframes animateModal {
+    from{
+        top : -300px;
+        opacity: 0; 
+    }
+    to {
+        top: 0;
+        opacity: 1;
+
+    }
+    
+}
+
+.modal-container .close-icon {
+    position: absolute;
+    right: 1rem;
+    color: #000000;
+}
+
+.modal-content {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-top: 2rem;
+}
+
+.modal-content img {
+    height: 20rem;
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+.modal-content p {
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    margin-top: 1.2rem;
+}
+
+.modal-content a {
+    display: flex;
+    gap: 1rem;
+    width: 12rem;
+    background-color: var(--primary);
+    color: white;
+    margin-top: 1rem;
+    padding: 1rem 1.6rem;
 }
 
 
@@ -563,6 +709,11 @@ footer .credit p{
 
     .contact .row form {
         padding-top: 0;
+    }
+
+    .modal-container {
+        flex-wrap: wrap;
+
     }
 
 

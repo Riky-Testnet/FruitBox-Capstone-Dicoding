@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FruitBox</title>
-
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,12 +17,19 @@
 
     <!-- Style Css -->
     <link rel="stylesheet" href="style.css" />
+
+    <!-- Alpine.JS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <script src="src/app.js"></script>
   </head>
   <body>
     <!-- Navbar Start -->
-    <nav class="navbar">
-      <a href="#" class="navbar-logo">Logo<span>FruitBox</span>.</a>
-
+    <nav class="navbar" x-data>
+      <img class="navbar-logo" src="img/logo.png" />
       <div class="navbar-nav">
         <a href="#"> Home </a>
         <a href="#about"> Tentang Kami</a>
@@ -31,24 +37,55 @@
         <a href="#products"> Product </a>
         <a href="#contact"> Kontak </a>
       </div>
-
+    
       <div class="navbar-extra">
         <a href="#" id="search-button"><i data-feather="search"></i></a>
-        <a href="#" id="shopping-cart"><i data-feather="shopping-cart"></i></a>
-        <a href="#" id="shopping-cart"><i data-feather="user"></i></a>
+        <a href="#" id="shopping-cart-button">
+          <i data-feather="shopping-cart"></i>
+          <span class="quantity-badge" x-show="$store.cart.quantity" x-text="$store.cart.quantity"></span>
+        </a>
+        <a href="#" id="user-button"><i data-feather="user"></i></a>
         <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
-
       </div>
-
+    
       <!-- Search Form Start -->
       <div class="search-form">
-        <input type="search" id="search-box" placeholder="Search here...">
+        <input type="search" id="search-box" placeholder="Search here..." />
         <label for="search-box"><i data-feather="search"></i></label>
       </div>
       <!-- Search Form End -->
+    
+      <!-- Shopping Cart Start -->
+      <div class="shopping-cart">
+        <div class="cart-item">
+          <img src="img/1.jpg" alt="Product 1" />
+          <div class="item-detail">
+            <h3>Product 1</h3>
+            <div class="item-price">Rp 35.000 / kg</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+        </div>
+        <div class="cart-item">
+          <img src="img/1.jpg" alt="Product 1" />
+          <div class="item-detail">
+            <h3>Product 1</h3>
+            <div class="item-price">Rp 35.000 / kg</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+        </div>
+        <div class="cart-item">
+          <img src="img/1.jpg" alt="Product 1" />
+          <div class="item-detail">
+            <h3>Product 1</h3>
+            <div class="item-price">Rp 35.000 / kg</div>
+          </div>
+          <i data-feather="trash-2" class="remove-item"></i>
+        </div>
+      </div>
     </nav>
+    <!-- Shopping cart end -->
     <!-- Navbar End -->
-
+    
     <!-- Hero Section Start -->
     <section class="hero" id="home">
       <main class="content">
@@ -61,18 +98,16 @@
       </main>
     </section>
     <!-- hero Section End -->
-
+    
     <!-- About Section Start -->
     <section id="about" class="about">
       <h2><span>Tentang </span>Kami</h2>
-
-      
+    
       <div class="row">
-        
         <div class="about-img">
           <img src="img/Background.jpg" alt="Tentang Kami" />
         </div>
-
+    
         <div class="content">
           <h3>Kenapa Memilih <span>Fruit</span>box?</h3>
           <p>
@@ -88,9 +123,9 @@
         </div>
       </div>
     </section>
-
+    
     <!-- About Section End -->
-
+    
     <!-- Menu Section Start -->
     <section id="menu" class="menu">
       <h2><span>List</span> Menu</h2>
@@ -98,7 +133,7 @@
         Kemewahan Buah-buahan Pilihan Terbaik untuk Kesehatan dan Kesenangan
         Anda.
       </p>
-
+    
       <div class="row">
         <div class="menu-card">
           <img src="img/1.jpg" alt="Apel" class="menu-card-img" />
@@ -132,147 +167,113 @@
         </div>
       </div>
     </section>
-
+    
     <!-- menu Section End-->
-
+    
     <!-- Product Section -->
-    <section class="products" id="products">
+    <section class="products" id="products" x-data="products">
       <h2><span>Katalog</span> Buah</h2>
       <p>Berikut Adalah Stock Buah Yang Tersedia</p>
-
+    
       <div class="row">
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/1.jpg" alt="Product 1">
-          </div>
-          <div class="product-content">
-            <h3>Apel Fuji</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
+        <template x-for="(item, index) in items" x-key="index">
+          <div class="product-card">
+            <div class="product-icons">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <use href="img/feather-sprite.svg#shopping-cart" />
+                </svg>
+              </a>
+              <a href="#" class="item-detail-button">
+                <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#eye" />
+              </svg>
+              </i></a>
             </div>
-            <div class="product-price"> Rp 35.000 / kg <span>Rp 40.000 / kg </span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/2.jpg" alt="Product 1">
-          </div>
-          <div class="product-content">
-            <h3>Jeruk Pontianak</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
+            <div class="product-image">
+              <img :src="`img/product/${item.img}`" alt="item.name" />
             </div>
-            <div class="product-price"> Rp 30.000 / kg <span>Rp 35.000 / kg </span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/3.jpg" alt="Product 1">
-          </div>
-          <div class="product-content">
-            <h3>Pisan Cavendish</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-              <i data-feather="star"></i>
+            <div class="product-content">
+              <h3 x-text="item.name"></h3>
+              <div class="product-stars">
+                <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+                <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+                <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+                <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+                <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <use href="img/feather-sprite.svg#star" />
+              </svg>
+              </div>
+              <div class="product-price"><span x-text="rupiah(item.price)"></span></div>
             </div>
-            <div class="product-price"> Rp 15.000 / kg <span>Rp 25.000 / kg </span></div>
           </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/4.jpg" alt="Product 1">
-          </div>
-          <div class="product-content">
-            <h3>Stoberi Impor</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-            </div>
-            <div class="product-price"> Rp 50.000 / 250 Gram <span>Rp 40.000 / Gram </span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/5.jpg" alt="Product 1">
-          </div>
-          <div class="product-content">
-            <h3>Buah Naga Putih</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price"> Rp 25.000 / kg <span>Rp 30.000 / kg </span></div>
-          </div>
-        </div>
-        <div class="product-card">
-          <div class="product-icons">
-            <a href="#"><i data-feather="shopping-cart"></i></a>
-            <a href="#"><i data-feather="eye"></i></a>
-          </div>
-          <div class="product-image">
-            <img src="img/product/6.jpg" alt="Product 1">
-          </div>
-          <div class="product-content">
-            <h3>Anggur Merah</h3>
-            <div class="product-stars">
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star" class="star-full"></i>
-              <i data-feather="star"></i>
-            </div>
-            <div class="product-price"> Rp 30.000 / kg <span>Rp 35.000 / kg </span></div>
-          </div>
-        </div>
+        </template>
       </div>
     </section>
-
-
+    
     <!-- Contact Section Start -->
-
+    
     <section id="contact" class="contact">
       <h2><span>Kontak</span> Kami</h2>
-      <p>
-        Silahkan Hubungi Kami, Jikalau ada Kendala Terkait Layanan
-      </p>
-
+      <p>Silahkan Hubungi Kami, Jikalau ada Kendala Terkait Layanan</p>
+    
       <div class="row">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126915.18135092904!2d106.6184033!3d-6.2506295000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69fbf7550a7233%3A0xea14952281ff20d8!2sFruit%20Station!5e0!3m2!1sen!2sid!4v1716802878219!5m2!1sen!2sid"
@@ -281,7 +282,7 @@
           referrerpolicy="no-referrer-when-downgrade"
           class="map"
         ></iframe>
-
+    
         <form class="action">
           <div class="input-group">
             <i data-feather="user"></i>
@@ -299,11 +300,11 @@
         </form>
       </div>
     </section>
-
+    
     <!--Contact Section End -->
-
+    
     <!-- Footer Start -->
-
+    
     <footer>
       <div class="socials">
         <a href="#"><i data-feather="instagram"></i></a>
@@ -311,28 +312,58 @@
         <a href="#"><i data-feather="facebook"></i></a>
         <a href="#"><i data-feather="mail"></i></a>
       </div>
-
+    
       <div class="links">
         <a href="#home">Home</a>
         <a href="#about">Tentang Kami</a>
         <a href="#menu">List Buah</a>
         <a href="#contact">Kontak</a>
       </div>
-
+    
       <div class="credit">
         <p>
           Created By Team Capstone Dicoding Riky, Hendy, Ainun | &copy; 2024
         </p>
       </div>
     </footer>
-
-
+    
+    <!-- Modal Box Item Details Start -->
+    <div class="modal" id="item-detail-modal">
+      <div class="modal-container">
+        <a href="#" class="close-icon"><i data-feather="x"></i></a>
+        <div class="modal-content">
+          <img src="/img/1.jpg" alt="Product 1" />
+          <div class="product-content">
+            <h3>Apel Fuji</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+              soluta atque dolor sunt, vel facilis quo minus quibusdam
+              dignissimos, sint rerum dolorem quos quod temporibus.
+            </p>
+            <div class="product-content">
+              <div class="product-stars">
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star" class="star-full"></i>
+                <i data-feather="star"></i>
+              </div>
+              <div class="product-price">
+                Rp 35.000 / kg <span>Rp 40.000 / kg </span>
+              </div>
+              <a href="#"><i data-feather="shopping-cart"></i><span>Add to Cart</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Box Item Details end -->
+    
     <!-- Feather Icons -->
     <script>
       feather.replace();
     </script>
-
+    
     <!-- Java Script -->
     <script src="js/script.js"></script>
-  </body>
+  </body> 
 </html>
