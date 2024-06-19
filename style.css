@@ -262,12 +262,16 @@ body {
     cursor: pointer;
 }
 
+.form-container .checkout-button.disabled {
+    background-color: #999;
+    cursor: not-allowed;
+}
 /* Hero Section */
 .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background-image: url('../img/BackgroundUtama.jpeg');
+    background-image: url('img/BackgroundUtama.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
